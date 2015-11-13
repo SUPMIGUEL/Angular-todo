@@ -1,11 +1,30 @@
-app = angular.module('todoApp'); // What's missing? Hint, it's more than one thing.
+var app = angular.module("todoApp", []); // What's missing? Hint, it's more than one thing.
 
-app.controller("TodosController", function() { // What's missing?
-	$scope.todos = ; // Store todo items here. What is the data type?
-	function addTodo() { // Rewrite to make this function abailable in your view
+app.controller("TodosController", function($scope) { // What's missing?
+    
+    $scope.todo = {description:""};
+
+	$scope.todos = [{description:"Todo1"},
+                    {description: "Todo2"}]; // Store todo items here. What is the data type?
+    $scope.show = false;
+	
+
+    $scope.addTodo = function(todo) { // Rewrite to make this function abailable in your view
 		// Add code here
+        $scope.todos.push(todo);
+        $scope.todo = {};
+        $scope.todoForm.$setPristine();
+        $scope.show = false;
 	};
-	function deleteAll() { // Rewrite to make this function abailable in your view
+
+	$scope.deleteAll = function(todo) { // Rewrite to make this function abailable in your view
 		// Add code here
+        $scope.todos = [];
+        $scope.todo = {};
 	};
-});
+
+    $scope.showForm = function(){
+        $scope.show = true;
+    };
+
+}); 
